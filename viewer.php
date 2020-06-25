@@ -78,6 +78,7 @@ $ret.='
   <label for="chk3">'.$row['qu62'].'</label>
   <input class="form-control" type="checkbox" id="chk3" name="chk3" value="'.$row['qu63'].'">
   <label for="chk1">'.$row['qu63'].'</label>
+  <input type="submit" name="buttonupdate" class="form-control" value="Отправить форму" > 
 ';
 }
 $ret.='</form></body></html>'; // заканчиваем формирование таблицы с контентом
@@ -95,5 +96,7 @@ return $ret; // возвращаем сформированный контент
 }
 // если запрос выполнен некорректно
 return 'Неизвестная ошибка'; // возвращаем сообщение
-} }}
+
+} }
+}
 ?>
