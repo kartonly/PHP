@@ -23,11 +23,11 @@ $sql='SELECT * FROM std_941.results ORDER BY ids LIMIT '.$diapazon.', 10';
 if ($_GET['sort'] == 'birth')
 $sql='SELECT * FROM std_941.results ORDER BY ids LIMIT '.$diapazon.', 10';
 $sql_res=mysqli_query($mysqli, $sql);
-$ret='<table>'; // строка с будущим контентом страницы
+$ret='<table style="border:2px solid black;">'; // строка с будущим контентом страницы
 while( $row=mysqli_fetch_assoc($sql_res) ) // пока есть записи
 {
 // выводим каждую запись как строку таблицы
-$ret.='<tr>'.$row['first'].'
+$ret.='<tr style="border:2px solid black;"><td>'.$row['first'].'</td>
 <td>'.$row['second'].'</td>
 <td>'.$row['third'].'</td>
 <td>'.$row['fourth'].'</td>
