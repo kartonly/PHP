@@ -38,6 +38,8 @@ if( isset($_POST['button']) && $_POST['button']== 'Ну ка проверим')
     if ($rightpass==$_POST['adminpassword']){
         echo '
         <form class="form-control" name="form_sess" method="post" action="">
+        <label for="ids">Id сессии</label>
+        <input class="form-control" type="text" id="ids" name="ids" placeholder="Введите id сессии">
         <label for="1q">Первый вопрос</label>
         <input class="form-control" type="text" id="1q" name="1q" placeholder="Первый вопрос">
         <label for="2q">Второй вопрос</label>
@@ -77,8 +79,94 @@ if( isset($_POST['button']) && $_POST['button']== 'Ну ка проверим')
     }
 }
 ?>
-</main>
+<?php
+$ids = $_POST['ids'];
+$q1 = $_POST['1q'];
+$q2 = $_POST['2q'];
+$q3 = $_POST['3q'];
+$q4 = $_POST['4q'];
+$q5 = $_POST['5q'];
+$q6 = $_POST['6q'];
+$q7 = $_POST['7q'];
+$q8 = $_POST['8q'];
+$q9 = $_POST['9q'];
+$q10 = $_POST['10q'];
+$q11 = $_POST['11q'];
+$q12 = $_POST['12q'];
+$q13 = $_POST['13q'];
+$q14 = $_POST['14q'];
+$q15 = $_POST['15q'];
+$q16 = $_POST['16q'];
+$ids = (int)$_POST['ids'];
+$q1 = (string)$_POST['1q'];
+$q2 = (string)$_POST['2q'];
+$q3 = (string)$_POST['3q'];
+$q4 = (string)$_POST['4q'];
+$q5 = (string)$_POST['5q'];
+$q6 = (string)$_POST['6q'];
+$q7 = (int)$_POST['7q'];
+$q8 = (string)$_POST['8q'];
+$q9 = (int)$_POST['9q'];
+$q10 = (string)$_POST['10q'];
+$q11 = (string)$_POST['11q'];
+$q12 = (int)$_POST['12q'];
+$q13 = (string)$_POST['13q'];
+$q14 = (int)$_POST['14q'];
+$q15 = (string)$_POST['15q'];
+$q16 = (int)$_POST['16q'];
 
+$mysqli = mysqli_connect('std-mysql', 'std_941', '84996111636', 'std_941');
+
+if( mysqli_connect_errno() ) // проверяем корректность подключения
+echo 'Ошибка подключения к БД: '.mysqli_connect_error();
+// если были переданы данные для добавления в БД
+if( isset($_POST['buttonupdate']) && $_POST['buttonupdate']== 'Создать форму')
+{ 
+// если были переданы данные для добавления в БД
+
+  // формируем и выполняем SQL-запрос для добавления записи
+$pre_id=mysqli_query($mysqli, 'SELECT * FROM std_941.form');
+$id=mysqli_num_rows($pre_id)+1;
+$sql_res=mysqli_query($mysqli,'INSERT INTO std_941.form (qu1, ids, qu2, qu3, qu4, qu5, qu51, qu51b, qu52, qu52b, qu6, qu61, qu61b, qu62, qu62b, qu63, qu63b) VALUES ("'.
+(string)($_POST['1q']).'","'.
+(int)($_POST['ids']).'", "'.
+(string)($_POST['2q']).'", "'.
+(string)($_POST['3q']).'", "'.
+(string)($_POST['4q']).'", "'.
+(string)($_POST['5q']).'", "'.
+(string)($_POST['6q']).'", "'.
+(int)($_POST['7q']).'", "'.
+(string)($_POST['8q']).'", "'.
+(int)($_POST['9q']).'", "'.
+(string)($_POST['10q']).'", "'.
+(string)($_POST['11q']).'", "'.
+(int)($_POST['12q']).'", "'.
+(string)($_POST['13q']).'", "'.
+(int)($_POST['14q']).'", "'.
+(string)($_POST['15q']).'", "'.
+(int)($_POST['16q']).
+'")');
+$q1 = '';
+$q2 = '';
+$q3 = '';
+$q4 = '';
+$q5 = '';
+$q6 = '';
+$q7 = '';
+$q8 = '';
+$q9 = '';
+$q10 = '';
+$q11 = '';
+$q12 = '';
+$q13 = '';
+$q14 = '';
+$q15 = '';
+$q16 = '';
+$ids='';
+echo '<a href="session.php">Ссылка на сессию</a>';
+}
+?>
+</main>
 <footer>
 <h3>Экзамен по PHP. Османова Карина, 191-321</h3>
 </footer>
