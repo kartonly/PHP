@@ -35,7 +35,8 @@ $ret.='<div style="padding:3%;">
 <div class="butons">
 <input style="border-radius: 10px;"  type="submit" name="edit" id="edit" class="form-control" value="Редактировать" data-toggle="modal" data-target="#myModal">
 <form style="border-radius: 10px;" class="form-control" name="form_updel" method="post" action="">
-<input style="border-radius: 10px; border:0px;" type="submit" name="del" id="del" class="form-control" value="Закрыть сессию">
+<input  type="submit" name="del1" id="del" class="form-control" value="Удалить сессию">
+<input  type="submit" name="del" id="del" class="form-control" value="Закрыть сессию">
 <input style="display:none;" name="numup" class="form-control" value='.$row['ids'].'> </form>
 </div>
 </div>
@@ -153,7 +154,18 @@ $mysqli = mysqli_connect('std-mysql', 'std_941', '84996111636', 'std_941');
   // перенаправление
   header("Refresh: 0");
 }
-
+if( isset($_POST['del1'])){
+    $numup = $_POST['numup'];
+    $numup=(int)$_POST['numup'];
+  $mysqli = mysqli_connect('std-mysql', 'std_941', '84996111636', 'std_941');
+    $query ="DELETE FROM results WHERE ids = ".$numup."";
+    $result = mysqli_query($mysqli, $query) or die("Ошибка " . mysqli_error($mysqli)); 
+    $query ="DELETE FROM form WHERE ids = ".$numup."";
+  $result = mysqli_query($mysqli, $query) or die("Ошибка " . mysqli_error($mysqli)); 
+    // перенаправление
+    header("Refresh: 0");
+  }
+  
 }
 $ret.='</div>'; // заканчиваем формирование таблицы с контентом
 if( $PAGES>1 ) // если страниц больше одной – добавляем пагинацию
