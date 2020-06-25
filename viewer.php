@@ -1,5 +1,7 @@
 
 
+
+
 <?php
 function getFriendsList($type, $page)
 {
@@ -52,20 +54,20 @@ $ret='
 <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet"> 
 </head>
 <body>
-<h1>Создание сессии</h1>
-<p><a href="destroy.php">Закрыть сессию</a></p><form class="form-control" name="form_sess" method="post" action="">'; // строка с будущим контентом страницы
+<h1>Заполните форму</h1>
+<p><a href="destroy.php">Закрыть сессию</a></p>'; // строка с будущим контентом страницы
 while( $row=mysqli_fetch_assoc($sql_res) ) // пока есть записи
 {
 $ret.='
-
+<form class="form-control" name="form_sess" method="post" action="">
 <label for="first">'.$row['qu1'].'</label>
 <input class="form-control" type="text" id="first" name="first" placeholder="Первый вопрос">
 <label for="second">'.$row['qu2'].'</label>
-<input class="form-control" type="text" id="first" name="first" placeholder="Второй вопрос">
+<input class="form-control" type="text" id="first" name="second" placeholder="Второй вопрос">
 <label for="third">'.$row['qu3'].'</label>
 <input class="form-control" type="text" id="third" name="third" placeholder="Третий вопрос">
 <label for="fourth">'.$row['qu4'].'</label>
-<input class="form-control" type="text" id="fourth" name="fourth" placeholder="Четвертый вопрос">
+<textarea class="form-control" type="text" id="fourth" name="fourth" placeholder="Четвертый вопрос"></textarea>
 <label>'.$row['qu5'].'</label>
 <input class="form-control" type="radio" id="Choice1" name="choice" value="'.$row['qu51'].'">
 <label for="Choice1">'.$row['qu52'].'</label>
@@ -78,10 +80,25 @@ $ret.='
   <label for="chk3">'.$row['qu62'].'</label>
   <input class="form-control" type="checkbox" id="chk3" name="chk3" value="'.$row['qu63'].'">
   <label for="chk1">'.$row['qu63'].'</label>
-  <input type="submit" name="buttonupdate" class="form-control" value="Отправить форму" > 
+  <input type="submit" name="buttonupdate" class="form-control" value="Отправить форму" > </form>
 ';
 }
-$ret.='</form></body></html>'; // заканчиваем формирование таблицы с контентом
+$ret.='</body></html>'; // заканчиваем формирование таблицы с контентом
+if( isset($_POST['buttonupdate']))
+{ 
+$first = (string)($_POST["first"]);
+$second = (string)$_POST["second"];
+$third = (string)($_POST["third"]);
+$fourth = (string)$_POST["fourth"];
+$choice = (string)($_POST["choice"]);
+$chk1 = (string)$_POST["chk1"];
+$chk2 = (string)$_POST["chk2"];
+$chk3 = (string)$_POST["chk3"];
+  // формируем и выполняем SQL-запрос для добавления записи
+$pre_id=mysqli_query($mysqli, 'SELECT * FROM std_941.results');
+$id=mysqli_num_rows($pre_id)+1;
+$sql_res=mysqli_query($mysqli,'INSERT INTO std_941.results(first, second, third, fourth, choice, chk1, chk2, chk3, ids) VALUES ("'.$first.','.$second.','.$third.','.$fourth.','.$choice.','.$chk1.','.$chk2.','.$chk3.','.$id.'")');
+header("Refresh: 0");}
 if( $PAGES>1 ) // если страниц больше одной – добавляем пагинацию
 {
 $ret.='<div id="pages">Выберите страницу: '; // блок пагинации
@@ -96,7 +113,22 @@ return $ret; // возвращаем сформированный контент
 }
 // если запрос выполнен некорректно
 return 'Неизвестная ошибка'; // возвращаем сообщение
-
+if( isset($_POST['buttonupdate']))
+{ 
+$first = (string)($_POST["first"]);
+$second = (string)$_POST["second"];
+$third = (string)($_POST["third"]);
+$fourth = (string)$_POST["fourth"];
+$choice = (string)($_POST["choice"]);
+$chk1 = (string)$_POST["chk1"];
+$chk2 = (string)$_POST["chk2"];
+$chk3 = (string)$_POST["chk3"];
+  // формируем и выполняем SQL-запрос для добавления записи
+$pre_id=mysqli_query($mysqli, 'SELECT * FROM std_941.results');
+$id=mysqli_num_rows($pre_id)+1;
+$sql_res=mysqli_query($mysqli,'INSERT INTO std_941.results(first, second, third, fourth, choice, chk1, chk2, chk3, ids) VALUES ("'.$first.','.$second.','.$third.','.$fourth.','.$choice.','.$chk1.','.$chk2.','.$chk3.','.$id.'")');
+header("Refresh: 0");}
 } }
 }
 ?>
+
